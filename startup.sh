@@ -55,6 +55,10 @@ if [ "${CORS_ENABLED}" = "true" ]; then
   if ! grep -q DockerGeoServerCorsFilter "$CATALINA_HOME/webapps/geoserver/WEB-INF/web.xml"; then
     echo "Enable CORS for $CATALINA_HOME/webapps/geoserver/WEB-INF/web.xml"
     sed -i "\:</web-app>:i\\
+    <context-param>\n\
+      <param-name>PROXY_BASE_URL</param-name>\n\
+      <param-value>https://pas-wms-geo-dq46smyyuq-et.a.run.app/geoserver</param-value>\n\
+    </context-param>\n\
     <filter>\n\
       <filter-name>DockerGeoServerCorsFilter</filter-name>\n\
       <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>\n\
